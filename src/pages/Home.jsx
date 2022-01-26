@@ -9,7 +9,7 @@ const Home = () => {
         <button><Link to="/users">users</Link></button>
         <button><Link to="/books">All Books</Link></button>
         <button><Link to="/availables">Available books</Link></button>
-        <button><Link to="/unavailable">Unavailable books</Link></button>
+        <button><Link to="/unavailables">Unavailable books</Link></button>
       </div>
     </div>
   )
