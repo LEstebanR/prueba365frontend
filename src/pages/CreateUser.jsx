@@ -23,11 +23,6 @@ const CreateUser = () => {
     axios.post("https://library365backend.herokuapp.com/users", user)
       .then(res => console.log(res, user))
       .catch(err => console.log(err, user))
-
-    setUser({})
-    window.location.href = ('/users')
-
-
   }
 
   return (
