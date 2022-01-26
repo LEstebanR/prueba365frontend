@@ -22,7 +22,14 @@ const Users = () => {
   const goToEditPage = (e) => {
     history.push(`/edituser/${e.target.value}`)
     window.location.reload()
-    
+  }
+
+  const deleteUser = (e) => {
+    axios.delete(`https://library365backend.herokuapp.com/user/${e.target.value}`)
+    .then(res => {
+      window.location.reload()
+    })
+    .catch(err => console.log(err))
   }
 
   return (
@@ -52,7 +59,7 @@ const Users = () => {
                 <td></td>
                 <td>
                   <button onClick={goToEditPage} value={user._id}>Edit</button>
-                  <button>Delete</button>
+                  <button onClick={deleteUser} value={user._id}>Delete</button>
                   <button>Loan</button>
                 </td>
               </tr>))
