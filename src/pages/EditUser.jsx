@@ -1,12 +1,27 @@
-import { Link } from "react-router-dom"
-import { useState } from "react"
+import { Link, useParams } from "react-router-dom"
+import { useState, useEffect } from "react"
 import axios from "axios"
 import history from "../utils/history"
 import '../assets/styles/createuser.css'
 
 const EditUser = () => {
   const [newUser, setNewUser] = useState({})
+  const [user, setUser] = useState({})
+  const { id } = useParams()
 
+  useEffect(() => {
+    const getUser = async () => {
+      await axios.get(`https://library365backend.herokuapp.com/user/${id}`)
+      .then(res => {
+        setUser(res.data)
+        setNewUser(res.data)
+      })
+      .catch(err => console.log(err))
+    }
+    getUser()
+  }, [id])
+
+  console.log(newUser)
   const getName = (e) => {
     setNewUser({ ...newUser, name: e.target.value })
   }
@@ -35,11 +50,11 @@ const EditUser = () => {
       <h1>Edit User</h1>
       <form>
         <label>Name</label>
-        <input type="text" name="name" onChange={getName}/>
+        <input type="text" name="name" onChange={getName} placeholder={user.name}/>
         <label>Email</label>
-        <input type="text" name="email" onChange={getEmail} />
+        <input type="text" name="email" onChange={getEmail} placeholder={user.email} />
         <label>Tel</label>
-        <input type="text" name="tel" onChange={getTel}/>
+        <input type="text" name="tel" onChange={getTel} placeholder={user.tel}/>
         <button><Link to="/users">Cancel</Link></button>
         <button onClick={updateUser}>Update</button>
       </form>
