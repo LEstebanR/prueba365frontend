@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 import { useState } from "react"
 import axios from "axios"
+import history from "../utils/history"
 import '../assets/styles/createuser.css'
 
 const CreateUser = () => {
@@ -21,7 +22,11 @@ const CreateUser = () => {
   const createUser = (e) => {
     e.preventDefault()
     axios.post("https://library365backend.herokuapp.com/users", user)
-      .then(res => console.log(res, user))
+      .then(res => {
+        console.log(res, user)
+        history.push("/users")
+        window.location.reload()
+      })
       .catch(err => console.log(err, user))
   }
 
