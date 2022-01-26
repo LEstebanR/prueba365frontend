@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
+import history from "../utils/history"
 import '../assets/styles/users.css'
 
 
@@ -18,7 +19,11 @@ const Users = () => {
     getUsers()
   }, [])
 
-  console.log(users)
+  const goToEditPage = (e) => {
+    history.push(`/edituser/${e.target.value}`)
+    window.location.reload()
+    
+  }
 
   return (
     <div className="users">
@@ -46,7 +51,7 @@ const Users = () => {
                 <td>{user.tel}</td>
                 <td></td>
                 <td>
-                  <button>Edit</button>
+                  <button onClick={goToEditPage} value={user._id}>Edit</button>
                   <button>Delete</button>
                   <button>Loan</button>
                 </td>

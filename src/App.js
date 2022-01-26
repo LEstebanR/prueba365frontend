@@ -7,6 +7,7 @@ import Availables from './pages/Availables.jsx'
 import Books from './pages/Books.jsx'
 import CreateBook from './pages/CreateBook.jsx'
 import Unavailables from './pages/Unavailables.jsx'
+import EditUser from './pages/EditUser.jsx'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Route path="/createuser" element={<CreateUser/>}/>
       <Route path="/availables" element={<Availables/>}/>
       <Route path="/unavailables" element={<Unavailables/>}/>
+      <Route path="/edituser/:id" element={<EditUser/>}/>
     </Routes>
 
   );
