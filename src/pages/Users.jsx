@@ -35,6 +35,7 @@ const Users = () => {
               <th>Email</th>
               <th>Tel</th>
               <th>Books</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -44,6 +45,11 @@ const Users = () => {
                 <td>{user.email}</td>
                 <td>{user.tel}</td>
                 <td></td>
+                <td>
+                  <button>Edit</button>
+                  <button>Delete</button>
+                  <button>Loan</button>
+                </td>
               </tr>))
             }
             
