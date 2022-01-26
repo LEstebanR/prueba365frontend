@@ -1,0 +1,26 @@
+.users{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.users-titleContainer{
+  display:flex;
+}
+
+table{
+  width: 90vw;
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-top: 25px;
+  
+}
+tr{
+  border: 1px solid black;
+}
+
+th{
+  border: black solid 1px;
+}
