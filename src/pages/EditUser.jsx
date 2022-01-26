@@ -21,7 +21,6 @@ const EditUser = () => {
     getUser()
   }, [id])
 
-  console.log(newUser)
   const getName = (e) => {
     setNewUser({ ...newUser, name: e.target.value })
   }
@@ -35,14 +34,13 @@ const EditUser = () => {
   }
 
   const updateUser = (e) => {
-    // e.preventDefault()
-    // axios.post("https://library365backend.herokuapp.com/users", user)
-    //   .then(res => {
-    //     console.log(res, user)
-    //     history.push("/users")
-    //     window.location.reload()
-    //   })
-    //   .catch(err => console.log(err, user))
+    e.preventDefault()
+    axios.put(`https://library365backend.herokuapp.com/user/${id}`, newUser)
+    .then(res => {
+      history.push("/users")
+      window.location.reload()
+    })
+    .catch(err => console.log(err))
   }
 
   return (
