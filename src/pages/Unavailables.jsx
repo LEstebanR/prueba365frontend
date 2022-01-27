@@ -20,7 +20,10 @@ const Unavailables = () => {
   }, [])
 
   const deleteBook = (e) => {
-    axios.delete(`https://library365backend.herokuapp.com/book/${e.target.value}`)
+    axios.delete(`https://library365backend.herokuapp.com/book`,{
+      bookId : unavailables[e.target.id]._id,
+      userId : unavailables[e.target.id].userID
+    })
   .then(res => {
     window.location.reload()
   })
