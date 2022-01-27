@@ -18,6 +18,14 @@ const Unavailables = () => {
     getUnavailablesBooks()
   }, [])
 
+  const deleteBook = (e) => {
+    axios.delete(`https://library365backend.herokuapp.com/book/${e.target.value}`)
+  .then(res => {
+    window.location.reload()
+  })
+  .catch(err => console.log(err))
+}
+
   return (
     <div className="unavailables">
       <div className="unavailables-titleContainer">
@@ -42,7 +50,7 @@ const Unavailables = () => {
                 <td>{book.author}</td>
                 <td>{book.userName}</td>
                 <td>
-                  <button>Delete</button>
+                  <button onClick={deleteBook} value={book._id}>Delete</button>
                   <button>Receive</button>
                 </td>
               </tr>))

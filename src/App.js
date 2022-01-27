@@ -8,7 +8,7 @@ import Books from './pages/Books.jsx'
 import CreateBook from './pages/CreateBook.jsx'
 import Unavailables from './pages/Unavailables.jsx'
 import EditUser from './pages/EditUser.jsx'
-import LeanBook from './pages/LeanBook.jsx'
+import LoanBook from './pages/LoanBook.jsx'
 
 function App() {
   return (
@@ -21,7 +21,7 @@ function App() {
       <Route path="/availables" element={<Availables/>}/>
       <Route path="/unavailables" element={<Unavailables/>}/>
       <Route path="/edituser/:id" element={<EditUser/>}/>
-      <Route path="/leanbook" element={<LeanBook/>}/>
+      <Route path="/loanbook" element={<LoanBook/>}/>
     </Routes>
 
   );

@@ -4,11 +4,14 @@ import { Link } from "react-router-dom"
 import history from "../utils/history"
 import '../styles/LeanBook.css'
 
-const LeanBook = () => {
+const LoanBook = () => {
   const [books, setBooks] = useState([])
+  const [book, setBook] = useState({})
+  const [users, setUsers] = useState([])
   const [user, setUser] = useState({})
   const [loan, setLoan] = useState({})
   const userid = new URLSearchParams(window.location.search).get("user")
+  const bookid = new URLSearchParams(window.location.search).get("book")
   
   useEffect(() => {
     const getBooks = async () => {
@@ -20,6 +23,19 @@ const LeanBook = () => {
         //   bookID : res.data[0]._id,
         //   bookName : res.data[0].name,
         // })
+      })
+      .catch(err => console.log(err))
+    }
+
+    const getBook = async () => {
+      await axios.get(`https://library365backend.herokuapp.com/book/${bookid}`)
+      .then(res => {
+        setBook(res.data)
+        setLoan({
+          ...loan,
+          bookID : res.data._id,
+          bookName : res.data.name,
+        })
       })
       .catch(err => console.log(err))
     }
@@ -40,12 +56,12 @@ const LeanBook = () => {
     const getUsers = async () => {
       await axios.get("https://library365backend.herokuapp.com/users")
       .then(res => {
-        setUser(res.data)
+        setUsers(res.data)
       })
       .catch(err => console.log(err))
     }
 
-    getBooks()
+    bookid ? getBook() : getBooks()
     userid ? getUser() : getUsers() 
     
   }, [userid])
@@ -60,7 +76,7 @@ const LeanBook = () => {
     console.log(loan)
     await axios.put("https://library365backend.herokuapp.com/loans", loan)
     .then(res => {
-      history.push("/users")
+      userid ? history.push("/users") : history.push("/books")
       window.location.reload()
     })
     .catch(err => console.log(err))
@@ -75,23 +91,47 @@ const LeanBook = () => {
       bookID: books[index]._id,
       bookName: books[index].name,
     })
-
   }
+
+  const handleUser =  (e) => {
+    const index = e.target.value
+    e.preventDefault()
+    setLoan({
+      ...loan,
+      userID: users[index]._id,
+      userName: users[index].name,
+    })
+  }
+
+  console.log(users)
 
 
   return (
     <div className="leanBook">
-      <h1>Lean Book</h1>
+      <h1>Loan Book</h1>
       <form>
-        {user ? <h2>{user.name}</h2> : <h2>Guest</h2>}
-        <label>Book</label>
-        <select name="book" onChange={handleBook}>
-          <option></option>
-          {books.map((book, i) => (
+        {user.name ? <h2>{user.name}</h2> : 
+          <div>
+            <label>User:</label>
+            <select name="book" onChange={handleUser}>
+            <option></option>
+              {users.map((user, i) => (
+            <option key={user._id} value={i}>{user.name}</option>
+          ))}
+        </select>
+          </div>
+        }
+        {book.name ? <h2>{book.name}</h2> :
+        <div> 
+          <label>Book</label>
+          <select name="book" onChange={handleBook}>
+            <option></option>
+              {books.map((book, i) => (
             <option key={book.bookID} value={i}>{book.name}</option>
           ))}
         </select>
-        <button><Link to="/users">Cancel</Link></button>
+        </div>}
+        <button><Link to="/">Cancel</Link></button>
         <button type="submit"onClick={loanBook}>Submit</button>
         
       </form>
@@ -100,4 +140,4 @@ const LeanBook = () => {
   )
 }
 
-export default LeanBook
+export default LoanBook

@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
+import history from "../utils/history"
 import '../assets/styles/availables.css'
 
 
@@ -17,6 +18,19 @@ const Availables = () => {
     }
     getAvailablesBooks()
   }, [])
+
+  const deleteBook = (e) => {
+    axios.delete(`https://library365backend.herokuapp.com/book/${e.target.value}`)
+  .then(res => {
+    window.location.reload()
+  })
+  .catch(err => console.log(err))
+}
+
+const goToLoanBook = (e) => {
+  history.push(`/loanbook?book=${e.target.value}`)
+  window.location.reload()
+}
 
   return (
     <div className="availables">
@@ -40,15 +54,14 @@ const Availables = () => {
                 <td>{book.name}</td>
                 <td>{book.author}</td>
                 <td>
-                  <button>Delete</button>
-                  <button>Loan</button>
+                <button onClick={deleteBook} value={book._id}>Delete</button>
+                  <button onClick={goToLoanBook} value={book._id}>Loan Book</button>
                 </td>
               </tr>))
             }
             
           </tbody>
         </table>
-
       </div>
     </div>
   )
