@@ -19,17 +19,17 @@ const Unavailables = () => {
     getUnavailablesBooks()
   }, [])
 
-  const deleteBook = (e) => {
-    axios.delete(`https://library365backend.herokuapp.com/book`,{
-      bookId : unavailables[e.target.id]._id,
-      userId : unavailables[e.target.id].userID
-    })
+  const deleteBook = async (e) => {
+    await axios.delete('https://library365backend.herokuapp.com/book',{data:{
+      bookId : unavailables[e.target.value]._id,
+      userId : unavailables[e.target.value].userID
+    }})
   .then(res => {
+    console.log(res)
     window.location.reload()
   })
   .catch(err => console.log(err))
 }
-console.log(unavailables)
 
 const returnBook = async(e) => {
   await axios.put(`https://library365backend.herokuapp.com/return`,{
@@ -68,7 +68,7 @@ const returnBook = async(e) => {
                 <td>{book.author}</td>
                 <td>{book.userName}</td>
                 <td>
-                  <button onClick={deleteBook} value={book._id}>Delete</button>
+                  <button onClick={deleteBook} value={i}>Delete</button>
                   <button onClick={returnBook} value={i}>Return Book</button>
                 </td>
               </tr>))
