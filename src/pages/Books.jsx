@@ -42,7 +42,7 @@ const Books = () => {
                 <td>{book.name}</td>
                 <td>{book.author}</td>
                 <td>{book.status}</td>
-                <td></td>
+                <td>{book.status == 'available' ? 'Library' : book.userName}</td>
                 <td>
                   <button>Delete</button>
                   <button>Loan</button>

@@ -61,7 +61,14 @@ const Users = () => {
                 <td>{user.name}</td>
                 <td>{user.email}</td>
                 <td>{user.tel}</td>
-                <td></td>
+                <td>
+                  {user.books.map(book => (
+                    <ul>
+                      <li key={book._id}>{book.bookName}</li>
+                    </ul>
+                  ))}
+                </td>
+
                 <td>
                   <button onClick={goToEditPage} value={user._id}>Edit</button>
                   <button onClick={deleteUser} value={user._id}>Delete</button>
