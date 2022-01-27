@@ -32,6 +32,11 @@ const Users = () => {
     .catch(err => console.log(err))
   }
 
+  const goToLeanBook = (e) => {
+    history.push(`/leanbook?user=${e.target.value}`)
+    window.location.reload()
+  }
+
   return (
     <div className="users">
       <div className="users-titleContainer">
@@ -60,7 +65,7 @@ const Users = () => {
                 <td>
                   <button onClick={goToEditPage} value={user._id}>Edit</button>
                   <button onClick={deleteUser} value={user._id}>Delete</button>
-                  <button>Loan</button>
+                  <button onClick={goToLeanBook} value={user._id}>Lean Book</button>
                 </td>
               </tr>))
             }
