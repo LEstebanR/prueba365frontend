@@ -2,6 +2,7 @@ import axios from "axios"
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import history from "../utils/history"
+
 import '../assets/styles/availables.css'
 
 
@@ -54,7 +55,7 @@ const goToLoanBook = (e) => {
                 <td>{book.name}</td>
                 <td>{book.author}</td>
                 <td>
-                <button onClick={deleteBook} value={book._id}>Delete</button>
+                  <button onClick={deleteBook} value={book._id}>Delete</button>
                   <button onClick={goToLoanBook} value={book._id}>Loan Book</button>
                 </td>
               </tr>))
