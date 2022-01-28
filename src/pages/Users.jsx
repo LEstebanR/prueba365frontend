@@ -4,17 +4,20 @@ import { Link } from "react-router-dom"
 import history from "../utils/history"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faShare, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import Loader from "../components/loader ";
 import '../assets/styles/users.css'
 
 
 const Users = () => {
   const [users, setUsers] = useState([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const getUsers = async () => {
       await axios.get("https://library365backend.herokuapp.com/users")
       .then(res => {
         setUsers(res.data)
+        setLoading(false)
       })
       .catch(err => console.log(err))
     }
@@ -43,13 +46,16 @@ const Users = () => {
   }
 
   return (
+    
     <div className="users">
       <div className="users-titleContainer">
         <button><Link to="/">Back</Link></button>
         <h1>Users</h1>
         <button><Link to="/createuser">Create user</Link></button>
       </div>
+      
       <div className="users-tableContainer">
+        {!loading ? (
         <table>
           <thead>
             <tr>
@@ -57,7 +63,7 @@ const Users = () => {
               <th>Email</th>
               <th>Tel</th>
               <th>Books</th>
-              <th>Actions</th>
+              <th>Actions<br/>(Edit, delete, Loan book)</th>
             </tr>
           </thead>
           <tbody>
@@ -83,8 +89,9 @@ const Users = () => {
             
           </tbody>
         </table>
-
+      ) : <Loader />}
       </div>
+      
     </div>
   )
 }
