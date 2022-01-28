@@ -1,8 +1,12 @@
 .createBook{
+  width : 100vw;
+  height : 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
+  background: linear-gradient(to bottom, #f5f5f5 0%, #A3423C 100%); 
+
   
 }
 
@@ -13,5 +17,51 @@ form{
   border: black solid 1px;
   padding: 25px;
   border-radius: 10px;
+  background-color: rgba(255,255,255,0.7);
+  height: 300px;
+  box-shadow:  0px 0px 10px 0px rgba(0,0,0,0.75);
+}
+
+label{
+  margin: 5px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+input{
+  margin: 5px;
+  height: 30px;
+  width: 90%;
+  border-radius: 5px;
+  font-size: 20px;
+}
+
+.createBook-buttons{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+}
+.createBook-button{
+  width: 45%;
+  height: 30px;
+  margin-top: 15px;
+  border-radius: 5px;
+  background-color: #889EAF;
+}
+
+.createBook-button:hover{
+  background-color: #61dafb;
+  cursor: pointer
+  }
+
+.createBook-button a{
+  text-decoration: none;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
 }
 

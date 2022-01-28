@@ -1,4 +1,4 @@
-.createUser{
+.loanBook{
   width : 100vw;
   height : 100vh;
   display: flex;
@@ -28,7 +28,7 @@ label{
   font-weight: bold;
 }
 
-input{
+select{
   margin: 5px;
   height: 30px;
   width: 90%;
@@ -36,26 +36,26 @@ input{
   font-size: 20px;
 }
 
-.editUser-buttons{
+.loan-buttons{
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   width: 100%;
 }
-.editUser-button{
+.loan-button{
   width: 45%;
   height: 30px;
-  margin-top: 15px;
+  margin-top: 25px;
   border-radius: 5px;
   background-color: #889EAF;
 }
 
-.editUser-button:hover{
+.loan-button:hover{
   background-color: #61dafb;
-  cursor: pointer
-  }
+  cursor: pointer;
+}
 
-.editUser-button a{
+.loan-button a{
   text-decoration: none;
   color: black;
   display: flex;
@@ -64,5 +64,3 @@ input{
   height: 100%;
   width: 100%;
 }
-
-

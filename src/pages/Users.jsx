@@ -26,14 +26,15 @@ const Users = () => {
   }, [])
 
   const goToEditPage = (e) => {
-    history.push(`/edituser/${e.target.value}`)
+    e.preventDefault()
+    history.push(`/edituser/${e.currentTarget.value}`)
     window.location.reload()
   }
 
   const deleteUser = (e) => {
     axios.delete(`https://library365backend.herokuapp.com/user`,{data:{
-      userId : users[e.target.value]._id,
-      bookId : users[e.target.value].bookID
+      userId : users[e.currentTarget.value]._id,
+      bookId : users[e.currentTarget.value].bookID
       }})
     .then(res => {
       Swal.fire({
@@ -51,7 +52,7 @@ const Users = () => {
   }
 
   const goToLoanBook = (e) => {
-    history.push(`/loanbook?user=${e.target.value}`)
+     history.push(`/loanbook?user=${e.currentTarget.value}`)
     window.location.reload()
   }
 
@@ -90,7 +91,7 @@ const Users = () => {
                   ))}
                 </td>
                 <td className="users-actions">
-                  <button onClick={goToEditPage} value={user._id}><FontAwesomeIcon icon={faPen}/></button>
+                  <button type="submit" onClick={goToEditPage} value={user._id}><FontAwesomeIcon className="icon" icon={faPen} /></button>
                   <button onClick={deleteUser} value={index}><FontAwesomeIcon icon={faTrashAlt}/></button>
                   <button onClick={goToLoanBook} value={user._id}><FontAwesomeIcon icon={faShare}/></button>
                 </td>

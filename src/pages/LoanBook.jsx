@@ -2,7 +2,9 @@ import { useState, useEffect } from "react"
 import axios from "axios"
 import { Link } from "react-router-dom"
 import history from "../utils/history"
-import '../styles/LeanBook.css'
+import Swal from "sweetalert2"
+import '../assets/styles/LoanBook.css'
+
 
 const LoanBook = () => {
   const [books, setBooks] = useState([])
@@ -18,11 +20,6 @@ const LoanBook = () => {
       await axios.get("https://library365backend.herokuapp.com/availables")
       .then(res => {
         setBooks(res.data)
-        // setLoan({
-        //   ...loan,
-        //   bookID : res.data[0]._id,
-        //   bookName : res.data[0].name,
-        // })
       })
       .catch(err => console.log(err))
     }
@@ -76,8 +73,19 @@ const LoanBook = () => {
     console.log(loan)
     await axios.put("https://library365backend.herokuapp.com/loans", loan)
     .then(res => {
-      userid ? history.push("/users") : history.push("/books")
-      window.location.reload()
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'The book has been loaned!',
+        showConfirmButton: false,
+        timer: 1500
+      })
+      setTimeout(() => {
+        userid ? history.push("/users") : history.push("/books")
+        window.location.reload()
+      } , 1500)
+      
+ 
     })
     .catch(err => console.log(err))
 
@@ -103,11 +111,8 @@ const LoanBook = () => {
     })
   }
 
-  console.log(users)
-
-
   return (
-    <div className="leanBook">
+    <div className="loanBook">
       <h1>Loan Book</h1>
       <form>
         {user.name ? <h2>{user.name}</h2> : 
@@ -131,9 +136,10 @@ const LoanBook = () => {
           ))}
         </select>
         </div>}
-        <button><Link to="/">Cancel</Link></button>
-        <button type="submit"onClick={loanBook}>Submit</button>
-        
+        <div className="loan-buttons">
+          <button className="loan-button"><Link to="/">Cancel</Link></button>
+          <button className="loan-button" type="submit"onClick={loanBook}>Submit</button>
+        </div>
       </form>
 
     </div>

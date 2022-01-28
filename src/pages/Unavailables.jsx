@@ -1,6 +1,9 @@
 import axios from "axios"
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowAltCircleDown, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import Swal from "sweetalert2";
 import '../assets/styles/unavailables.css'
 
 
@@ -21,26 +24,45 @@ const Unavailables = () => {
 
   const deleteBook = async (e) => {
     await axios.delete('https://library365backend.herokuapp.com/book',{data:{
-      bookId : unavailables[e.target.value]._id,
-      userId : unavailables[e.target.value].userID
+      bookId : unavailables[e.currentTarget.value]._id,
+      userId : unavailables[e.currentTarget.value].userID
     }})
   .then(res => {
-    console.log(res)
-    window.location.reload()
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Book deleted!',
+      showConfirmButton: false,
+      timer: 1500
+    })
+    setTimeout(() => {
+      window.location.reload()
+    } , 1500)
   })
+
   .catch(err => console.log(err))
 }
 
 const returnBook = async(e) => {
   await axios.put(`https://library365backend.herokuapp.com/return`,{
-    bookID : unavailables[e.target.value]._id,
-    bookName : unavailables[e.target.value].name,
-    userID : unavailables[e.target.value].userID,
-    userName : unavailables[e.target.value].userName,
+    bookID : unavailables[e.currentTarget.value]._id,
+    bookName : unavailables[e.currentTarget.value].name,
+    userID : unavailables[e.currentTarget.value].userID,
+    userName : unavailables[e.currentTarget.value].userName,
   })
   .then(res => {
-    window.location.reload()
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Book returned!',
+      showConfirmButton: false,
+      timer: 1500
+    })
+    setTimeout(() => {
+      window.location.reload()
+    } , 1500)
   })
+
   .catch(err => console.log(err))
 }
 
@@ -67,9 +89,9 @@ const returnBook = async(e) => {
                 <td>{book.name}</td>
                 <td>{book.author}</td>
                 <td>{book.userName}</td>
-                <td>
-                  <button onClick={deleteBook} value={i}>Delete</button>
-                  <button onClick={returnBook} value={i}>Return Book</button>
+                <td className="unavailables-actions">
+                  <button onClick={deleteBook} value={i}><FontAwesomeIcon icon={faTrashAlt}/></button>
+                  <button onClick={returnBook} value={i}><FontAwesomeIcon icon={faArrowAltCircleDown}/></button>
                 </td>
               </tr>))
             }

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 import { useState } from "react"
 import axios from "axios"
 import history from "../utils/history"
+import Swal  from 'sweetalert2'
 import '../assets/styles/createbook.css'
 
 const CreateBook = () => {
@@ -19,9 +20,17 @@ const CreateBook = () => {
     e.preventDefault()
     axios.post("https://library365backend.herokuapp.com/books", book)
       .then(res => {
-        console.log(res, book)
-        history.push("/books")
-        window.location.reload()
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Book created!',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        setTimeout(() => {
+          history.push("/books")
+          window.location.reload()
+        } , 1500)
       })
       .catch(err => console.log(err))
   }
@@ -34,8 +43,10 @@ const CreateBook = () => {
         <input type="text" name="name" onChange={getName}/>
         <label>Author</label>
         <input type="text" name="author" onChange={getAuthor} />
-        <button><Link to="/books">Cancel</Link></button>
-        <button onClick={createBook}>Create</button>
+        <div className="createBook-buttons">
+          <button className="createBook-button"><Link to="/books">Cancel</Link></button>
+          <button className="createBook-button" onClick={createBook}>Create</button>
+        </div>
       </form>
     </div>
   )

@@ -2,6 +2,8 @@ import axios from "axios"
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import history from "../utils/history"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faShare, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 
 import '../assets/styles/availables.css'
 
@@ -21,7 +23,7 @@ const Availables = () => {
   }, [])
 
   const deleteBook = (e) => {
-    axios.delete(`https://library365backend.herokuapp.com/book/${e.target.value}`)
+    axios.delete(`https://library365backend.herokuapp.com/book/${e.currentTarget.value}`)
   .then(res => {
     window.location.reload()
   })
@@ -29,7 +31,7 @@ const Availables = () => {
 }
 
 const goToLoanBook = (e) => {
-  history.push(`/loanbook?book=${e.target.value}`)
+  history.push(`/loanbook?book=${e.currentTarget.value}`)
   window.location.reload()
 }
 
@@ -54,9 +56,9 @@ const goToLoanBook = (e) => {
               <tr key={book._id}>
                 <td>{book.name}</td>
                 <td>{book.author}</td>
-                <td>
-                  <button onClick={deleteBook} value={book._id}>Delete</button>
-                  <button onClick={goToLoanBook} value={book._id}>Loan Book</button>
+                <td className="availables-actions">
+                  <button onClick={deleteBook} value={book._id}><FontAwesomeIcon icon={faTrashAlt}/></button>
+                  <button onClick={goToLoanBook} value={book._id}><FontAwesomeIcon icon={faShare}/></button>
                 </td>
               </tr>))
             }
