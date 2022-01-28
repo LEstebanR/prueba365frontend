@@ -2,6 +2,8 @@ import axios from "axios"
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import history from "../utils/history"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPen, faShare, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import '../assets/styles/users.css'
 
 
@@ -25,7 +27,10 @@ const Users = () => {
   }
 
   const deleteUser = (e) => {
-    axios.delete(`https://library365backend.herokuapp.com/user/${e.target.value}`)
+    axios.delete(`https://library365backend.herokuapp.com/user`,{data:{
+      userId : users[e.target.value]._id,
+      bookId : users[e.target.value].bookID
+      }})
     .then(res => {
       window.location.reload()
     })
@@ -56,7 +61,7 @@ const Users = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map(user => (
+            {users.map((user, index) => (
               <tr key={user._id}>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
@@ -64,14 +69,14 @@ const Users = () => {
                 <td>
                   {user.books.map(book => (
                     <ul>
-                      <li key={book._id}>{book.bookName}</li>
+                      <li className="users-bookslist"key={book._id}>{book.bookName}</li>
                     </ul>
                   ))}
                 </td>
-                <td>
-                  <button onClick={goToEditPage} value={user._id}>Edit</button>
-                  <button onClick={deleteUser} value={user._id}>Delete</button>
-                  <button onClick={goToLoanBook} value={user._id}>Loan Book</button>
+                <td className="users-actions">
+                  <button onClick={goToEditPage} value={user._id}><FontAwesomeIcon icon={faPen}/></button>
+                  <button onClick={deleteUser} value={index}><FontAwesomeIcon icon={faTrashAlt}/></button>
+                  <button onClick={goToLoanBook} value={user._id}><FontAwesomeIcon icon={faShare}/></button>
                 </td>
               </tr>))
             }

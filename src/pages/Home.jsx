@@ -6,10 +6,10 @@ const Home = () => {
     <div className="home">
       <h1>Library</h1>
       <div className="home-buttonsContainner">
-        <button><Link to="/users">users</Link></button>
-        <button><Link to="/books">All Books</Link></button>
-        <button><Link to="/availables">Available books</Link></button>
-        <button><Link to="/unavailables">Unavailable books</Link></button>
+        <button className="home-button"><Link to="/users" className="link">Users</Link></button>
+        <button className="home-button"><Link to="/books">All Books</Link></button>
+        <button className="home-button"><Link to="/availables">Available books</Link></button>
+        <button className="home-button"><Link to="/unavailables">Unavailable books</Link></button>
       </div>
     </div>
   )
