@@ -5,6 +5,7 @@ import history from "../utils/history"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faShare, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import Loader from "../components/loader ";
+import Swal from "sweetalert2";
 import '../assets/styles/users.css'
 
 
@@ -35,7 +36,16 @@ const Users = () => {
       bookId : users[e.target.value].bookID
       }})
     .then(res => {
-      window.location.reload()
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'User deleted!',
+        showConfirmButton: false,
+        timer: 1500
+      })
+      setTimeout(() => {
+        window.location.reload()
+      } , 1500)
     })
     .catch(err => console.log(err))
   }

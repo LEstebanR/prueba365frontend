@@ -2,6 +2,7 @@ import { Link, useParams } from "react-router-dom"
 import { useState, useEffect } from "react"
 import axios from "axios"
 import history from "../utils/history"
+import Swal from 'sweetalert2'
 import '../assets/styles/createuser.css'
 
 const EditUser = () => {
@@ -37,8 +38,17 @@ const EditUser = () => {
     e.preventDefault()
     axios.put(`https://library365backend.herokuapp.com/user/${id}`, newUser)
     .then(res => {
-      history.push("/users")
-      window.location.reload()
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'User updated!',
+        showConfirmButton: false,
+        timer: 1500
+      })
+      setTimeout(() => {
+        history.push('/users')
+        window.location.reload()
+      } , 1500)
     })
     .catch(err => console.log(err))
   }
@@ -53,8 +63,10 @@ const EditUser = () => {
         <input type="text" name="email" onChange={getEmail} placeholder={user.email} />
         <label>Tel</label>
         <input type="text" name="tel" onChange={getTel} placeholder={user.tel}/>
-        <button><Link to="/users">Cancel</Link></button>
-        <button onClick={updateUser}>Update</button>
+        <div className="editUser-buttons">
+          <button className="editUser-button"><Link to="/users">Cancel</Link></button>
+          <button className="editUser-button" onClick={updateUser}>Update</button>
+        </div>
       </form>
     </div>
   )
