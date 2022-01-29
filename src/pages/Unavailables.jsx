@@ -1,7 +1,7 @@
 import axios from "axios"
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
-import Loader from '../components/loader'
+import Loader from "../components/loader ";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowAltCircleDown, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";

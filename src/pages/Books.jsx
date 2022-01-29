@@ -5,7 +5,7 @@ import history from "../utils/history"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowAltCircleDown, faShare, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
-import Loader from '../components/loader'
+import Loader from "../components/loader ";
 import '../assets/styles/books.css'
 
 
