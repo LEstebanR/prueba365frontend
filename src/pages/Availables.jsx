@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
+import Loader from '../components/loader'
 import history from "../utils/history"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShare, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
@@ -10,12 +11,13 @@ import '../assets/styles/availables.css'
 
 const Availables = () => {
   const [availables, setAvailables] = useState([])
-
+  const [loading, setLoading] = useState(true)
   useEffect(() => {
     const getAvailablesBooks = async () => {
       await axios.get("https://library365backend.herokuapp.com/availables")
       .then(res => {
         setAvailables(res.data)
+        setLoading(false)
       })
       .catch(err => console.log(err))
     }
@@ -43,6 +45,7 @@ const goToLoanBook = (e) => {
         <button><Link to="/createbook">Create Book</Link></button>
       </div>
       <div className="availables-tableContainer">
+        {!loading ?
         <table>
           <thead>
             <tr>
@@ -65,6 +68,7 @@ const goToLoanBook = (e) => {
             
           </tbody>
         </table>
+        : <Loader/> }
       </div>
     </div>
   )

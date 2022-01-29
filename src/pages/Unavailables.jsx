@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
+import Loader from '../components/loader '
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowAltCircleDown, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
@@ -9,13 +10,14 @@ import '../assets/styles/unavailables.css'
 
 const Unavailables = () => {
   const [unavailables, setUnavailables] = useState([])
-
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const getUnavailablesBooks = async () => {
       await axios.get("https://library365backend.herokuapp.com/unavailables")
       .then(res => {
         setUnavailables(res.data)
+        setLoading(false)
       })
       .catch(err => console.log(err))
     }
@@ -74,6 +76,7 @@ const returnBook = async(e) => {
         <button><Link to="/createbook">Create Book</Link></button>
       </div>
       <div className="unavailables-tableContainer">
+        {!loading ? 
         <table>
           <thead>
             <tr>
@@ -98,6 +101,7 @@ const returnBook = async(e) => {
             
           </tbody>
         </table>
+        : <Loader/> }
 
       </div>
     </div>

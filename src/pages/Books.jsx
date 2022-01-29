@@ -5,17 +5,20 @@ import history from "../utils/history"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowAltCircleDown, faShare, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
+import Loader from '../components/loader'
 import '../assets/styles/books.css'
 
 
 const Books = () => {
   const [books, setBooks] = useState([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const getBooks = async () => {
       await axios.get("https://library365backend.herokuapp.com/books")
       .then(res => {
         setBooks(res.data)
+        setLoading(false)
       })
       .catch(err => console.log(err))
     }
@@ -77,6 +80,7 @@ const Books = () => {
         <button><Link to="/createbook">Create Book</Link></button>
       </div>
       <div className="books-tableContainer">
+      {!loading ? 
         <table>
           <thead>
             <tr>
@@ -106,6 +110,8 @@ const Books = () => {
             
           </tbody>
         </table>
+        : <Loader/> }
+
 
       </div>
     </div>
