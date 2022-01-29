@@ -3,6 +3,7 @@ import { useState } from "react"
 import axios from "axios"
 import history from "../utils/history"
 import '../assets/styles/createuser.css'
+import Swal from "sweetalert2"
 
 const CreateUser = () => {
   const [user, setUser] = useState({})
@@ -23,9 +24,17 @@ const CreateUser = () => {
     e.preventDefault()
     axios.post("https://library365backend.herokuapp.com/users", user)
       .then(res => {
-        console.log(res, user)
-        history.push("/users")
-        window.location.reload()
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'User created!',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        setTimeout(() => {
+          history.push("/users")
+          window.location.reload()
+        } , 1500)
       })
       .catch(err => console.log(err, user))
   }
