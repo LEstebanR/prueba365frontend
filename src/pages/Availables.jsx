@@ -48,7 +48,7 @@ const goToLoanBook = (e) => {
             <tr>
               <th>Name</th>
               <th>Author</th>
-              <th>Actions</th>
+              <th>Actions <br/> (Delete, Loan)</th>
             </tr>
           </thead>
           <tbody>

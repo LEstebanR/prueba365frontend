@@ -71,8 +71,7 @@ const Users = () => {
           <thead>
             <tr>
               <th>Name</th>
-              <th>Email</th>
-              <th>Tel</th>
+              <th>Email - Tel</th>
               <th>Books</th>
               <th>Actions<br/>(Edit, delete, Loan book)</th>
             </tr>
@@ -81,8 +80,7 @@ const Users = () => {
             {users.map((user, index) => (
               <tr key={user._id}>
                 <td>{user.name}</td>
-                <td>{user.email}</td>
-                <td>{user.tel}</td>
+                <td>{user.email} <br/> {user.tel}</td>
                 <td>
                   {user.books.map(book => (
                     <ul>

@@ -40,8 +40,10 @@ const CreateUser = () => {
         <input type="text" name="email" onChange={getEmail} />
         <label>Tel</label>
         <input type="text" name="tel" onChange={getTel}/>
-        <button><Link to="/users">Cancel</Link></button>
-        <button onClick={createUser}>Create</button>
+        <div className="editUser-buttons">
+          <button className="editUser-button"><Link to="/users">Cancel</Link></button>
+          <button className="editUser-button" onClick={createUser}>Create</button>
+        </div>
       </form>
     </div>
   )

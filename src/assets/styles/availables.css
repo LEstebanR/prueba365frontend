@@ -1,10 +1,11 @@
 .availables{
-  height: 100vh;
   width: 100vw;
   display: flex;
   flex-direction: column;
   align-items: center;
   background: linear-gradient(to bottom, #f5f5f5 0%, #A3423C 100%); 
+  min-height: 100vh;
+
 }
 
 .availables-titleContainer{
@@ -52,6 +53,7 @@ table{
   background-color: rgba(255,255,255,0.7);
   box-shadow:  0px 0px 10px 0px rgba(0,0,0,0.75);
   font-size: 14px;
+  margin-bottom: 100px;
   
 }
 tr{
